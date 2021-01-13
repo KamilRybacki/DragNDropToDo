@@ -1,0 +1,304 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
+
+.attribution { font-size: 11px; text-align: center; }
+.attribution a { color: hsl(228, 45%, 44%); }
+
+:root {
+
+    /* Primary */
+
+    --bright-blue: hsl(220, 98%, 61%);
+    --checkmark-idle-bg: white;
+    --checkmark-done-bg: linear-gradient(45deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+    --all-filter-btn-bg: linear-gradient(45deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+
+    /* Initial Theme */
+
+    --site-title: var(--light-site-title);
+    
+    --tasks-circle-border: #F0EFF3;
+    --tasks-separator: black;
+
+    --tasks-navbar-gray: #CAC9D1;
+    --tasks-navbar-dark-gray: #9594A0;
+
+    /* Light Theme */
+
+    --light-site-title: white; 
+
+    --very-light-gray: hsl(0, 0%, 98%);
+    --very-light-grayish-blue: hsl(236, 33%, 92%);
+    --light-grayish-blue: hsl(233, 11%, 84%);
+    --dark-grayish-blue: hsl(236, 9%, 61%);
+    --very-dark-grayish-blue: hsl(235, 19%, 35%);
+
+    /* Dark Theme */
+    
+    --dark-site-title: white; 
+
+    --very-dark-blue: hsl(235, 21%, 11%);
+    --very-dark-desaturated-blue: hsl(235, 24%, 19%);
+    --light-grayish-blue: hsl(234, 39%, 85%);
+    --light-grayish-blue-hover: hsl(236, 33%, 92%);
+    --dark-grayish-blue: hsl(234, 11%, 52%);
+    --very-dark-grayish-blue: hsl(233, 14%, 35%);
+    --very-dark-grayish-blue-alt: hsl(237, 14%, 26%);
+
+    /* Body Copy */
+
+    --list-entries-font-size: 18px
+}
+
+* {
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body {
+
+   display: flex;
+
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-around;
+   
+   font-family: 'Josefin Sans';
+
+}
+
+#site_backdrop {
+    
+    z-index: -1;
+    
+    position: fixed;
+    top: 0%;
+    left: 0%;
+   
+    background-image: url('images/bg-desktop-light.jpg');
+    
+    width: 100%;
+    height: 40%;
+    
+    background-size: 100% 100%;
+
+}
+
+#layout_wrapper {
+
+    margin-top: 100px;
+    margin-bottom: 50px;
+
+    width: 38%;
+
+}
+
+header {
+
+    display: flex;
+
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+#site_title {
+    
+    text-transform: uppercase;
+    
+    color: var(--site-title);
+
+}
+
+.clear_button {
+
+    font-family: 'Josefin Sans';
+
+    background: none;
+    border: none;
+
+}
+
+#site_theme_toggle {
+    
+    display: inline;
+
+}
+
+#site_theme_toggle:focus { outline: none; }
+
+#tasks_main_module {
+
+    margin-top: 50px;
+
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    
+    box-shadow: 1px 1px 5px cadetblue;
+    
+}
+
+#task_input {
+
+    border-radius: 5px;
+
+}
+
+#task_input_text {
+
+    font-family: 'Josefin Sans';
+    font-size: var(--list-entries-font-size);
+    
+    background: none;
+    border: none;
+
+    width: 90%
+
+}
+
+#task_input_text::placeholder { color: var(--tasks-navbar-gray); }
+#task_input_text::placeholder::-moz-placeholder { color: var(--tasks-navbar-gray); }
+#task_input_text::-webkit-placeholder { color: var(--tasks-navbar-gray); } 
+
+
+#task_input_text:active, :focus {
+    
+    outline: none;
+
+}
+
+#tasks_dashboard {
+    
+    margin-top: 30px;
+    
+    width: 100%;
+
+}
+
+.task {
+    
+    background-color: white;
+    
+    padding-left: 10px;
+    
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    display: flex;
+
+    width: 100%;
+    
+    border-bottom: 1px solid var(--tasks-separator);
+
+}
+
+.task:first-child {
+
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+}
+
+.task_type_icon_holder {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 10%;
+
+}
+
+.task_type_icon_circle {
+
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+
+    border: 2px solid var(--tasks-circle-border);
+
+}
+
+.task_text {
+
+    display: flex;
+    align-items: center;
+
+    width: 90%;
+    
+    margin-left: 10px;
+    
+    font-size: var(--list-entries-font-size);
+
+}
+
+#tasks_options {
+    
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: white;
+    
+    padding: 20px;
+    
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    
+}
+
+#tasks_counter {
+    
+    color: var(--tasks-navbar-gray);
+
+}
+
+.filter_btn {
+   
+    color: var(--tasks-navbar-dark-gray);
+    font-weight: bold;
+
+}
+
+#filter_all_btn {
+
+    color: transparent;
+    
+    background-image: var(--all-filter-btn-bg);
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    
+}
+
+.filter_btn:focus { outline: none; }
+
+#tasks_options_middle {
+    
+    display: flex;
+    justify-content: space-between;
+
+    width: 30%;
+    
+}
+
+#clear_completed_btn {
+    
+    color: var(--tasks-navbar-gray);
+    
+}
+
+#tip_bottom {
+    
+    margin-top: 50px;
+
+    font-size: 12px;
+    color: var(--tasks-navbar-gray);
+    
+}

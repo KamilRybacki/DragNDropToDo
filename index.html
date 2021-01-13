@@ -5,32 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   
   <title>Frontend Mentor | Todo app</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
 </head>
 <body>
 
-  Todo
+  <div id="site_backdrop"></div>
 
-  <!-- Add dynamic number --> items left
+  <div id="layout_wrapper">
 
-  All
-  Active 
-  Completed
+    <header>
+      <h1 id="site_title">Todo</h1>
+      <button id="site_theme_toggle" class="clear_button"><img src="./images/icon-moon.svg" alt="Toggle dark theme"></button>
+    </header>
 
-  Clear Completed
+    <main id="tasks_main_module">
 
-  Drag and drop to reorder list
+      <div class="task" id="task_input">
+        <div class="task_type_icon_holder">
+          <div class="task_type_icon_circle"></div>
+        </div>
+        <input type="text" placeholder="Create a new todo..." id="task_input_text">
+      </div>
+      
+      <section id="tasks_dashboard">
 
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+        <div class="task">
+          <div class="task_type_icon_holder">
+            <div class="task_type_icon_circle"></div>
+          </div>
+          <p class="task_text">Task 1</p>
+        </div> 
+        
+        <div class="task">
+          <div class="task_type_icon_holder">
+            <div class="task_type_icon_circle"></div>
+          </div>
+          <p class="task_text">Task 2</p>
+        </div> 
+
+      </section>
+      
+      <nav id="tasks_options">
+        
+        <p id="tasks_counter">5 items left</p>
+
+        <div id="tasks_options_middle">
+          <button class="filter_btn clear_button" id="filter_all_btn">All</button>
+          <button class="filter_btn clear_button" id="filter_active_btn">Active</button>
+          <button class="filter_btn clear_button" id="filter_completed_btn">Completed</button>
+        </div>
+
+        <button id="clear_completed_btn" class="clear_button">Clear Completed</button>
+
+      </nav>
+
+    </main>
+      
+    <center>
+      <h2 id="tip_bottom">Drag and drop to reorder list</h2>
+    </center>
+
   </div>
+  
+  <footer class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="https://github.com/KamilRybacki">Kamil Rybacki</a>.
+  </footer>
 </body>
 </html>
