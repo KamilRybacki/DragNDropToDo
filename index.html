@@ -20,61 +20,55 @@
 
     <header>
       <h1 id="site_title">Todo</h1>
-      <button id="site_theme_toggle" class="clear_button"><img src="./images/icon-moon.svg" alt="Toggle dark theme"></button>
+      <button id="site_theme_toggle" class="clear_button" onclick="changeTheme()"><img src="./images/icon-moon.svg" alt="Toggle dark theme"></button>
     </header>
+    
+    <div class="task" id="task_input">
+      <div class="task_type_icon_holder">
+        <div id="task_input_icon_circle_wrapper">
+          <div id="task_input_icon_circle"></div>
+        </div>
+      </div>
+      <input type="text" placeholder="Create a new todo..." id="task_input_text">
+    </div>
 
     <main id="tasks_main_module">
 
-      <div class="task" id="task_input">
-        <div class="task_type_icon_holder">
-          <div class="task_type_icon_circle"></div>
-        </div>
-        <input type="text" placeholder="Create a new todo..." id="task_input_text">
-      </div>
-      
       <section id="tasks_dashboard">
-
-        <div class="task">
-          <div class="task_type_icon_holder">
-            <div class="task_type_icon_circle"></div>
-          </div>
-          <p class="task_text">Task 1</p>
-        </div> 
-        
-        <div class="task">
-          <div class="task_type_icon_holder">
-            <div class="task_type_icon_circle"></div>
-          </div>
-          <p class="task_text">Task 2</p>
-        </div> 
 
       </section>
       
       <nav id="tasks_options">
         
-        <p id="tasks_counter">5 items left</p>
+        <p id="tasks_counter">...</p>
 
-        <div id="tasks_options_middle">
-          <button class="filter_btn clear_button" id="filter_all_btn">All</button>
-          <button class="filter_btn clear_button" id="filter_active_btn">Active</button>
-          <button class="filter_btn clear_button" id="filter_completed_btn">Completed</button>
+        <div id="tasks_options_middle_desktop">
+          <button class="filter_btn clear_button" id="filter_all_btn" onclick="filterTasks('all');">All</button>
+          <button class="filter_btn clear_button" id="filter_active_btn" onclick="filterTasks('active');">Active</button>
+          <button class="filter_btn clear_button" id="filter_completed_btn" onclick="filterTasks('completed');">Completed</button>
         </div>
 
-        <button id="clear_completed_btn" class="clear_button">Clear Completed</button>
+        <button id="clear_completed_btn" class="clear_button" onclick="clearCompletedTasks();">Clear Completed</button>
 
       </nav>
 
     </main>
-      
-    <center>
-      <h2 id="tip_bottom">Drag and drop to reorder list</h2>
-    </center>
 
+    <div id="tasks_options_middle_mobile">
+      <button class="filter_btn clear_button" id="filter_all_btn" onclick="filterTasks('all');">All</button>
+      <button class="filter_btn clear_button" id="filter_active_btn" onclick="filterTasks('active');">Active</button>
+      <button class="filter_btn clear_button" id="filter_completed_btn" onclick="filterTasks('completed');">Completed</button>
+    </div>
+    
   </div>
+    
+  <h2 id="tip_bottom">Drag and drop to reorder list</h2>
   
   <footer class="attribution">
+    <script src="todo.js"></script>
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="https://github.com/KamilRybacki">Kamil Rybacki</a>.
   </footer>
+
 </body>
 </html>
