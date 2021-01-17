@@ -207,7 +207,8 @@ function filterTasks(target_state){
         btn.style.color = 'var(--tasks-navbar-dark-gray)';
     });
     
-    $(`#filter_${target_state}_btn`)[0].style.color = 'var(--tasks-current-filter-btn-bg)';
+    $(`#filter_${target_state}_btn_des`)[0].style.color = 'var(--tasks-current-filter-btn-bg)';
+    $(`#filter_${target_state}_btn_mob`)[0].style.color = 'var(--tasks-current-filter-btn-bg)';
     
     countTasks();
     
