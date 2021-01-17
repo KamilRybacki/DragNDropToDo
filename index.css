@@ -29,6 +29,8 @@
     --tasks-separator: var(--light-tasks-separator);
     --tasks-text-color: var(--light-tasks-text-color);
     --tasks-completed-text-color: var(--light-tasks-completed-text-color);
+    
+    --tasks-drag-over: var(--light-tasks-drag-over);
 
     --tasks-navbar-bg: var(--light-tasks-navbar-bg);
     
@@ -38,7 +40,7 @@
     --tasks-navbar-counter: var(--light-tasks-navbar-counter);
     --tasks-navbar-middle-hover: var(--light-tasks-navbar-middle-hover);
 
-    --tasks-all-filter-btn-bg: var(--light-tasks-all-filter-btn-bg);
+    --tasks-current-filter-btn-bg: var(--light-tasks-current-filter-btn-bg);
 
     /* Light Theme */
     
@@ -64,6 +66,8 @@
     --light-tasks-text-color: #555764;
     --light-tasks-completed-text-color: #E5E4E7;
     
+    --light-tasks-drag-over: #555764;
+    
     --light-tasks-navbar-bg: white;
 
     --light-tasks-navbar-gray: #CAC9D1;
@@ -72,7 +76,7 @@
     --light-tasks-navbar-counter: #98979D;
     --light-tasks-navbar-middle-hover: #555764;
 
-    --light-tasks-all-filter-btn-bg: hsl(220, 98%, 61%);
+    --light-tasks-current-filter-btn-bg: hsl(220, 98%, 61%);
 
     /* Dark Theme */
     
@@ -97,6 +101,8 @@
     --dark-tasks-separator: #323449;
     --dark-tasks-text-color: #A6A8C1;
     --dark-tasks-completed-text-color: #4A4C61;
+    
+    --dark-tasks-drag-over: #555764;
 
     --dark-tasks-navbar-bg: #25273C;
     
@@ -106,7 +112,7 @@
     --dark-tasks-navbar-counter: #98979D;
     --dark-tasks-navbar-middle-hover: white;
 
-    --dark-tasks-all-filter-btn-bg: hsl(220, 98%, 61%);
+    --dark-tasks-current-filter-btn-bg: hsl(220, 98%, 61%);
 
     /* Body Copy */
 
@@ -122,6 +128,11 @@
     padding: 0;
     box-sizing: border-box;
     
+    transition:         all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition:    all 0.2s ease;
+    -ms-transition:     all 0.2s ease;
+    -o-transition:      all 0.2s ease;
 
 }
 
@@ -269,6 +280,9 @@ header {
 #tasks_dashboard {
 
     width: 100%;
+    
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 
 }
 
@@ -291,6 +305,21 @@ header {
     width: 100%;
     
     border-bottom: 1px solid var(--tasks-separator);
+
+}
+
+.task_drag {
+
+    transform: 'translate(0, 0)';
+    
+    outline: none;
+
+    border-radius: 0px;
+
+    border: none;
+    border: 1px dashed var(--tasks-drag-over);
+    
+    box-shadow: none;
 
 }
 
@@ -388,6 +417,9 @@ header {
 
 .task_cancel {
     
+    position: relative;
+    right: 2%;
+
     height: 32px;
     width: 32px;
 
@@ -433,15 +465,6 @@ header {
 
 }
 
-#filter_all_btn {
-
-    color: var(--tasks-all-filter-btn-bg);
-
-    background-clip: text;
-    -webkit-background-clip: text;
-    
-}
-
 .filter_btn:hover { color: var(--tasks-navbar-middle-hover); }
 
 #tasks_options_middle_desktop {
@@ -472,7 +495,7 @@ header {
 
 #tip_bottom {
     
-    margin-top: 75px;
+    margin-top: 20px;
     
     text-align: center;
     
@@ -541,7 +564,7 @@ header {
     border: 1px solid black;
     padding: 2px;
 
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
 

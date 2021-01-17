@@ -1,8 +1,10 @@
+dragged_task = null;
+
 function setThemeColors (theme_id){
 
     var theme_variables_names = ["site-bg", "site-title", "tasks-input-text", "tasks-input-placeholder-text", 
     "tasks-module-shadow", "tasks-bg", "tasks-circle-border", "tasks-circle-hover-border", "tasks-icon-circle-bg", 
-    "tasks-checkmark-idle-bg", "tasks-checkmark-done-bg", "tasks-separator", "tasks-text-color", "tasks-completed-text-color", 
+    "tasks-checkmark-idle-bg", "tasks-checkmark-done-bg", "tasks-separator", "tasks-text-color", "tasks-completed-text-color", "tasks-drag-over",
     "tasks-navbar-bg", "tasks-navbar-gray", "tasks-navbar-dark-gray", "tasks-navbar-counter", "tasks-navbar-middle-hover", "tasks-all-filter-btn-bg"];
 
     theme_variables_names.forEach(element => {
@@ -16,6 +18,9 @@ function setThemeColors (theme_id){
         
         if(theme_id == 'D')  $("#site_backdrop").css("background-image","url('images/bg-desktop-dark.jpg')");
         if(theme_id == 'L')  $("#site_backdrop").css("background-image","url('images/bg-desktop-light.jpg')");
+
+        if(theme_id == 'L')  $("#site_theme_toggle").html( "<img src='./images/icon-moon.svg' alt='Toggle dark theme'>" );
+        if(theme_id == 'D')  $("#site_theme_toggle").html( "<img src='./images/icon-sun.svg' alt='Toggle light theme'>" );
 
     });
 
@@ -89,11 +94,17 @@ $("#task_input_text").on("keyup", (event) => {
             new_task.appendChild(new_task_cancel_button)
             
             new_task.setAttribute("task_state","active");
+            new_task.setAttribute("draggable","true");
+        
+            new_task.addEventListener('dragstart', taskDragStart, false)
+            new_task.addEventListener('dragover', taskDragOver, false)
+            new_task.addEventListener('dragenter', taskDragEnter, false)
+            new_task.addEventListener('dragleave', taskDragLeave, false)
+            new_task.addEventListener('dragend', taskDragEnd, false)
+            new_task.addEventListener('drop', taskDragDrop, false)
 
             tasks_dashboard.appendChild(new_task);
             
-            console.log(new_task)
-
             $("#task_input_text").val("")       
             
             countTasks();
@@ -101,6 +112,67 @@ $("#task_input_text").on("keyup", (event) => {
         }
     }
 })
+
+function taskDragStart(e){
+    
+    this.style.opacity = 0.4;
+    
+    dragged_task = this;
+
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData('text/html', this.innerHTML);
+    
+}
+
+function taskDragOver(e){
+
+    if (e.preventDefault()){
+        e.preventDefault();
+    }
+
+    e.dataTransfer.dropEffect = 'move';
+    return false;
+
+}
+
+function taskDragEnter(e){
+
+    this.classList.add('task_drag')
+
+}
+
+function taskDragEnd(e){
+    
+    this.style.opacity = 1.0;
+    this.classList.remove('task_drag')
+    
+}
+
+function taskDragLeave(e){
+
+    this.classList.remove('task_drag');
+
+}
+
+function taskDragDrop(e){
+
+    if (e.stopPropagation) e.stopPropagation();
+    if (e.preventDefault) e.preventDefault()
+
+    if (dragged_task !== this) {
+
+        dragged_task.innerHTML = this.innerHTML;
+        this.innerHTML = e.dataTransfer.getData('text/html');
+
+    }
+
+    this.classList.remove('task_drag')
+
+    console.log(dragged_task)
+
+    return false;
+
+}
 
 function filterTasks(target_state){
 
@@ -120,6 +192,12 @@ function filterTasks(target_state){
 
         });
     }
+    
+    $('.filter_btn').each( (_, btn) => {
+        btn.style.color = 'var(--tasks-navbar-dark-gray)';
+    });
+    
+    $(`#filter_${target_state}_btn`)[0].style.color = 'var(--tasks-current-filter-btn-bg)';
     
     countTasks();
     
