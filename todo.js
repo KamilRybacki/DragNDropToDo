@@ -19,8 +19,8 @@ function setThemeColors (theme_id){
         if(theme_id == 'D')  $("#site_backdrop").css("background-image","url('images/bg-desktop-dark.jpg')");
         if(theme_id == 'L')  $("#site_backdrop").css("background-image","url('images/bg-desktop-light.jpg')");
 
-        if(theme_id == 'L')  $("#site_theme_toggle").html( "<img src='./images/icon-moon.svg' alt='Toggle dark theme'>" );
-        if(theme_id == 'D')  $("#site_theme_toggle").html( "<img src='./images/icon-sun.svg' alt='Toggle light theme'>" );
+        if(theme_id == 'L')  $("#site_theme_toggle").html( "<img src='./images/icon-moon.svg' alt='Toggle dark theme' aria-label='Set theme to dark'>" );
+        if(theme_id == 'D')  $("#site_theme_toggle").html( "<img src='./images/icon-sun.svg' alt='Toggle light theme' aria-label='Set theme to light'>" );
 
     });
 
@@ -69,6 +69,8 @@ $("#task_input_text").on("keyup", (event) => {
 
             var new_task_icon_holder = document.createElement('div'); 
             new_task_icon_holder.className = 'task_type_icon_holder'
+            new_task_icon_holder.setAttribute('title','Mark as complete');
+            new_task_icon_holder.setAttribute('aria-label','Mark this task as completed');
 
             var new_task_icon_circle_wrapper = document.createElement('div');
             new_task_icon_circle_wrapper.className = 'task_type_icon_circle_wrapper'
@@ -84,6 +86,8 @@ $("#task_input_text").on("keyup", (event) => {
             new_task_cancel_button.classList.add("task_cancel") 
             new_task_cancel_button.classList.add("clear_button");
             new_task_cancel_button.setAttribute("onclick","this.parentElement.remove(); countTasks();");
+            new_task_cancel_button.setAttribute("title","Cancel this task");
+            new_task_cancel_button.setAttribute("aria-label","Cancel selected task");
             
             new_task_text.innerText = $("#task_input_text").val();
 
@@ -108,6 +112,7 @@ $("#task_input_text").on("keyup", (event) => {
             $("#task_input_text").val("")       
             
             countTasks();
+            filterTasks('all');
 
         }
     }
@@ -161,14 +166,19 @@ function taskDragDrop(e){
 
     if (dragged_task !== this) {
 
+        original_task_state = dragged_task.getAttribute('task_state');
+        dragged_task_state = this.getAttribute('task_state');
+        
         dragged_task.innerHTML = this.innerHTML;
         this.innerHTML = e.dataTransfer.getData('text/html');
+
+        this.setAttribute('task_state', original_task_state);
+        dragged_task.setAttribute('task_state', dragged_task_state)
 
     }
 
     this.classList.remove('task_drag')
-
-    console.log(dragged_task)
+    countTasks();
 
     return false;
 
@@ -205,17 +215,43 @@ function filterTasks(target_state){
 
 function completeTask(icon_wrapper){
 
-    icon_wrapper.innerHTML = "<img src='images/icon-check.svg'>"
-    icon_wrapper.style.backgroundImage = "var(--tasks-circle-hover-border)";
-    
     clicked_wrapper_task = icon_wrapper.parentElement.parentElement
+    clicked_wrapper_holder = icon_wrapper.parentElement
     
-    clicked_wrapper_task.setAttribute('task_state','completed')
+    current_state = clicked_wrapper_task.getAttribute('task_state')
     
-    clicked_wrapper_task_text = clicked_wrapper_task.children[1]
+    if(current_state == "active") {
+    
+        icon_wrapper.innerHTML = "<img src='images/icon-check.svg'>"
+        icon_wrapper.style.backgroundImage = "var(--tasks-circle-hover-border)";
 
-    clicked_wrapper_task_text.style.textDecoration = 'line-through'
-    clicked_wrapper_task_text.style.color = 'var(--tasks-completed-text-color)'
+        clicked_wrapper_holder.setAttribute('title','Set back to active');
+        clicked_wrapper_holder.setAttribute('aria-label','Mark this task back as active');
+        
+        clicked_wrapper_task.setAttribute('task_state','completed');
+        
+        clicked_wrapper_task_text = clicked_wrapper_task.children[1]
+
+        clicked_wrapper_task_text.style.textDecoration = 'line-through'
+        clicked_wrapper_task_text.style.color = 'var(--tasks-completed-text-color)'
+
+    }
+    if(current_state == "completed"){
+
+        clicked_wrapper_task_text = clicked_wrapper_task.children[1]
+
+        clicked_wrapper_task_text.style.textDecoration = 'none'
+        clicked_wrapper_task_text.style.color = 'var(--tasks-text-color)'
+        
+        clicked_wrapper_task.setAttribute('task_state','active');
+         
+        clicked_wrapper_holder.setAttribute('title','Mark as complete');
+        clicked_wrapper_holder.setAttribute('aria-label','Mark this task as completed');
+        
+        icon_wrapper.style.backgroundImage = "";
+        icon_wrapper.innerHTML = '<div id="task_input_icon_circle"></div>'
+
+    }
     
     countTasks();
 
@@ -230,6 +266,7 @@ function clearCompletedTasks() {
     });
     
     countTasks();
+    filterTasks('all');
 }
 
 $(document).ready( () => {

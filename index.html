@@ -9,27 +9,27 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   
-  <title>Frontend Mentor | Todo app</title>
+  <title>Frontend Mentor | To-do app</title>
 
 </head>
 <body>
 
-  <div id="site_backdrop"></div>
+  <div id="site_backdrop" tabindex="-1" title="Site backdrop" aria-label="Site backdrop at top"></div>
 
-  <div id="layout_wrapper">
+  <div id="layout_wrapper" tabindex="-1">
 
     <header>
-      <h1 id="site_title">Todo</h1>
-      <button id="site_theme_toggle" class="clear_button" onclick="changeTheme()"><img src="./images/icon-moon.svg" alt="Toggle dark theme"></button>
+      <h1 id="site_title" tabindex="-1">Todo</h1>
+      <button id="site_theme_toggle" class="clear_button" onclick="changeTheme()" title="Switch theme" aria-label="Switch current color theme"><img src="./images/icon-moon.svg" alt="Toggle dark theme" aria-label="Set theme to dark"></button>
     </header>
     
-    <div class="task" id="task_input">
-      <div class="task_type_icon_holder">
+    <div class="task" id="task_input" tabindex="-1">
+      <div class="task_type_icon_holder" tabindex="-1" title="Mark as complete" aria-label="Mark this task as completed">
         <div id="task_input_icon_circle_wrapper">
           <div id="task_input_icon_circle"></div>
         </div>
       </div>
-      <input type="text" placeholder="Create a new todo..." id="task_input_text">
+      <input type="text" placeholder="Create a new todo..." id="task_input_text" title="Text content of the new task" aria-label="New task text content">
     </div>
 
     <main id="tasks_main_module">
@@ -43,21 +43,21 @@
         <p id="tasks_counter">...</p>
 
         <div id="tasks_options_middle_desktop">
-          <button class="filter_btn clear_button" id="filter_all_btn" onclick="filterTasks('all');">All</button>
-          <button class="filter_btn clear_button" id="filter_active_btn" onclick="filterTasks('active');">Active</button>
-          <button class="filter_btn clear_button" id="filter_completed_btn" onclick="filterTasks('completed');">Completed</button>
+          <button class="filter_btn clear_button" id="filter_all_btn" onclick="filterTasks('all');" title="Show all" aria-label="Show all tasks">All</button>
+          <button class="filter_btn clear_button" id="filter_active_btn" onclick="filterTasks('active');"  title="Show active" aria-label="Show active tasks">Active</button>
+          <button class="filter_btn clear_button" id="filter_completed_btn" onclick="filterTasks('completed');"  title="Show completed" aria-label="Show completed tasks">Completed</button>
         </div>
 
-        <button id="clear_completed_btn" class="clear_button" onclick="clearCompletedTasks();">Clear Completed</button>
+        <button id="clear_completed_btn" class="clear_button" onclick="clearCompletedTasks();" title="Clear complete" aria-label="Clear completed tasks">Clear Completed</button>
 
       </nav>
 
     </main>
 
     <div id="tasks_options_middle_mobile">
-      <button class="filter_btn clear_button" id="filter_all_btn" onclick="filterTasks('all');">All</button>
-      <button class="filter_btn clear_button" id="filter_active_btn" onclick="filterTasks('active');">Active</button>
-      <button class="filter_btn clear_button" id="filter_completed_btn" onclick="filterTasks('completed');">Completed</button>
+      <button class="filter_btn clear_button" id="filter_all_btn" onclick="filterTasks('all');" title="Show all" aria-label="Show all tasks" >All</button>
+      <button class="filter_btn clear_button" id="filter_active_btn" onclick="filterTasks('active');" title="Show all" aria-label="Show all tasks" >Active</button>
+      <button class="filter_btn clear_button" id="filter_completed_btn" onclick="filterTasks('completed');" title="Show all" aria-label="Show all tasks">Completed</button>
     </div>
     
   </div>

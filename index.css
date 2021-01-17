@@ -390,6 +390,12 @@ header {
 
 }
 
+.task_type_icon_circle:hover {
+
+    opacity: 0.5;
+
+}
+
 #task_input_icon_circle {
 
     width: 25px;
